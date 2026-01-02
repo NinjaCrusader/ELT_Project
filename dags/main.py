@@ -50,7 +50,7 @@ with DAG(
     dag_id = 'update_db',
     default_args=default_args,
     description='DAG to process JSON file and inser data into both stating and core schemas',
-    schedule='0 13 * * *',
+    schedule='0 15 * * *',
     catchup= False,
 ) as dag:
 

@@ -9,7 +9,7 @@ def load_data():
     file_path = f"./data/ELT_Project{date.today()}.json"
 
     try:
-        logger.info(f"Processing file:ELT_Project{date.today()}.json")
+        logger.info(f"Processing file: ELT_Project{date.today()}")
 
         with open(file_path, "r", encoding='utf-8') as raw_data:
             data = json.load(raw_data)

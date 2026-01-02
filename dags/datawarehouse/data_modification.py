@@ -3,22 +3,26 @@ import logging
 logger = logging.getLogger(__name__)
 table = "yt_api"
 
+
 def insert_rows(cur, conn, schema, row):
 
     try:
 
-        if schema == 'staging':
-            video_id = 'video_id'
+        if schema == "staging":
+
+            video_id = "video_id"
 
             cur.execute(
-                f"""INSERT INTO {schema}.{table}("Video_ID", "Video_Title", "Upload_Date", "Duration", "Video_Views", "Likes_Count", "Comments_Count")
+                f"""
+                INSERT INTO {schema}.{table}("Video_ID", "Video_Title", "Upload_Date", "Duration", "Video_Views", "Likes_Count", "Comments_Count")
                 VALUES (%(video_id)s, %(title)s, %(publishedAt)s, %(duration)s, %(viewCount)s, %(likeCount)s, %(commentCount)s);
-                """, row
+                """,
+                row,
             )
 
         else:
 
-            video_id = 'Video_ID'
+            video_id = "Video_ID"
 
             cur.execute(
                 f"""
@@ -28,16 +32,17 @@ def insert_rows(cur, conn, schema, row):
                 row,
             )
 
-            conn.commit()
+        conn.commit()
 
-            logger.info(f"Inserted row with Video_ID: {row[video_id]} ")
+        logger.info(f"Inserted row with Video_ID: {row[video_id]}")
 
     except Exception as e:
         logger.error(f"Error inserting row with Video_ID: {row[video_id]}")
         raise e
-    
+
+
 def update_rows(cur, conn, schema, row):
-    
+
     try:
         # staging
         if schema == "staging":
@@ -75,8 +80,9 @@ def update_rows(cur, conn, schema, row):
     except Exception as e:
         logger.error(f"Error updating row with Video_ID: {row[video_id]} - {e}")
         raise e
-    
-def delete_rows(cur,conn,schema,ids_to_delete):
+
+
+def delete_rows(cur, conn, schema, ids_to_delete):
 
     try:
 
